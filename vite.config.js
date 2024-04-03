@@ -7,5 +7,5 @@ export default defineConfig({
       'Cross-Origin-Opener-Policy': 'same-origin',
     },
   },
-  assetsInclude: ['**/*.bin'],
+  assetsInclude: ['**/*.bin', '**/*.worker.js'],
 });

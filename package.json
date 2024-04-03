@@ -13,7 +13,7 @@
     "vite": "^5.2.0"
   },
   "dependencies": {
-    "@typefox/pyright": "^1.1.299",
+    "@typefox/pyright-browser": "^1.1.299",
     "@webcontainer/api": "^1.1.9"
   }
 }
