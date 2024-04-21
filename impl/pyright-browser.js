@@ -61,6 +61,12 @@ async function initialize() {
       },
       trace: "off",
       locale: undefined,
+      workspaceFolders: [
+        {
+          name: "src",
+          uri: "file://src/",
+        },
+      ],
     };
 
     connection.listen();
