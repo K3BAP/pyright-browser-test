@@ -9,8 +9,10 @@ import {
     InitializeRequest,
     LogMessageNotification,
     PublishDiagnosticsNotification,
-    RegistrationRequest,
-    InitializeParams
+    InitializeParams,
+    DidOpenTextDocumentNotification,
+    DidOpenTextDocumentParams,
+    InitializedNotification
 } from 'vscode-languageserver-protocol'
 
 
@@ -48,9 +50,8 @@ async function initialize() {
       rootUri: null,
       capabilities: {
         textDocument: {
-          diagnostic: {
-            dynamicRegistration: false,
-            relatedDocumentSupport: false
+          publishDiagnostics: {
+
           }
         }
       },
@@ -62,6 +63,21 @@ async function initialize() {
     const initializeResponse = await connection.sendRequest(InitializeRequest.type, initializeParams);
 
     console.log(`Server initialized.\n${JSON.stringify(initializeResponse, null, 2)}`)
+
+    connection.sendNotification(InitializedNotification.type, {});
+
+    /** @type {DidOpenTextDocumentParams} */
+    const didOpenTextDocumentParams = {
+      textDocument: {
+        languageId: "python",
+        uri: "/unnamed.py",
+        version: 1,
+        text: "print(hallo)"
+      }
+    };
+
+    await connection.sendNotification(DidOpenTextDocumentNotification.type, didOpenTextDocumentParams);
+
 }
 
 window.addEventListener('load', async () => {
