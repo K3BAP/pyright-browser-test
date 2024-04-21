@@ -15,6 +15,7 @@
   "dependencies": {
     "@typefox/pyright-browser": "^1.1.299",
     "@webcontainer/api": "^1.1.9",
-    "vscode-jsonrpc": "^8.2.0"
+    "vscode-jsonrpc": "^8.2.0",
+    "vscode-languageserver-protocol": "^3.17.5"
   }
 }
