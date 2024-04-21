@@ -12,11 +12,13 @@ import {
     InitializeParams,
     DidOpenTextDocumentNotification,
     DidOpenTextDocumentParams,
+    DidChangeTextDocumentNotification,
+    DidChangeTextDocumentParams,
     InitializedNotification
 } from 'vscode-languageserver-protocol'
 import { files } from './pyright-browser.files';
 
-
+var documentVersion = 1;
 
 async function initialize() {
     // Initialize the worker with the JavaScript file
@@ -81,12 +83,27 @@ async function initialize() {
       textDocument: {
         languageId: "python",
         uri: "/src/unnamed.py",
-        version: 1,
+        version: documentVersion++,
         text: "print(hallo)"
       }
     };
 
     await connection.sendNotification(DidOpenTextDocumentNotification.type, didOpenTextDocumentParams);
+
+    checkButton.onclick = function () {
+      /** @type {DidChangeTextDocumentParams} */
+      const didChangeParams = {
+        textDocument: {
+          uri: "/src/unnamed.py",
+          version: documentVersion++
+        },
+        contentChanges: [
+          {text: inputTextArea.value}
+        ]
+      };
+
+      connection.sendNotification(DidChangeTextDocumentNotification.type, didChangeParams);
+    }
 
 }
 
