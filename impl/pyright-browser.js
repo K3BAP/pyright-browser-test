@@ -14,6 +14,7 @@ import {
     DidOpenTextDocumentParams,
     InitializedNotification
 } from 'vscode-languageserver-protocol'
+import { files } from './pyright-browser.files';
 
 
 
@@ -55,6 +56,9 @@ async function initialize() {
           }
         }
       },
+      initializationOptions: {
+        files: files.files
+      },
       trace: "off",
       locale: undefined,
     };
@@ -70,7 +74,7 @@ async function initialize() {
     const didOpenTextDocumentParams = {
       textDocument: {
         languageId: "python",
-        uri: "/unnamed.py",
+        uri: "/src/unnamed.py",
         version: 1,
         text: "print(hallo)"
       }
