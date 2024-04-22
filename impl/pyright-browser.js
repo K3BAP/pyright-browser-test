@@ -90,7 +90,7 @@ async function initialize() {
 
     await connection.sendNotification(DidOpenTextDocumentNotification.type, didOpenTextDocumentParams);
 
-    checkButton.onclick = function () {
+    inputTextArea.oninput = function () {
       /** @type {DidChangeTextDocumentParams} */
       const didChangeParams = {
         textDocument: {
